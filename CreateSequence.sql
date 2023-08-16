@@ -10,17 +10,17 @@ CREATE TABLE sequences
 select* from sequences;
 
 -- 시퀀스 생성하는 함수
-/*DELIMITER $$
+DELIMITER $$
 	CREATE PROCEDURE `create_sequence` (IN the_name text)
     MODIFIES SQL DATA
     DETERMINISTIC
     BEGIN
     	DELETE FROM sequences WHERE name = the_name;
         INSERT INTO sequences VALUES(the_name, 0);
-    END;*/
+    END;
 
 -- nextval 생성 함수
-/*DELIMITER $$
+DELIMITER $$
 	CREATE FUNCTION `nextval`(the_name VARCHAR(32))
     RETURNS BIGINT UNSIGNED
     MODIFIES SQL DATA
@@ -30,7 +30,7 @@ select* from sequences;
         UPDATE sequences SET currval = currval +1 WHERE name = the_name;
         SELECT currval INTO ret FROM sequences WHERE name = the_name LIMIT 1;
         RETURN ret;
-    END;*/
+    END;
 
 -- user_id 시퀀스 생성
 call create_sequence('seq_user_id');
